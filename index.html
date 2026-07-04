@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Serayna Spa | Healing Powers of Mandi Bunga</title>
+    <title>Serayna Spa | Kembalikan Kesegaran Aura & Jiwa Wanita</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,8 +13,8 @@
             theme: {
                 extend: {
                     colors: {
-                        freshGreen: '#1e3a1f',
-                        romanticPink: '#f4e5e2',
+                        emerald: '#1b3322',
+                        cream: '#faf6f0',
                         gold: '#c5a880',
                     },
                     fontFamily: {
@@ -28,278 +28,334 @@
     <style>
         .petal {
             position: fixed;
-            background: linear-gradient(to bottom right, #fbcfe8, #f472b6);
+            background: linear-gradient(to bottom right, #ffd1dc, #ffb7c5);
             border-radius: 150% 0 150% 0;
             pointer-events: none;
-            opacity: 0.7;
-            z-index: 99;
-            animation: fall linear forwards;
+            opacity: 0.8;
+            filter: drop-shadow(0 0 2px rgba(0,0,0,0.1));
+            animation: drift linear infinite;
         }
-        @keyframes fall {
-            0% { transform: translateY(-10vh) translateX(0) rotate(0deg); opacity: 0.8; }
-            100% { transform: translateY(105vh) translateX(150px) rotate(360deg); opacity: 0; }
+        @keyframes drift {
+            0% { transform: translateY(-10vh) translateX(0) rotate(0deg); }
+            100% { transform: translateY(105vh) translateX(120px) rotate(360deg); }
         }
-        .marquee-content {
-            display: flex;
-            width: calc(250px * 10);
-            animation: scroll 30s linear infinite;
-        }
-        @keyframes scroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(calc(-250px * 5)); }
-        }
-        .hero-overlay { background: linear-gradient(rgba(30, 58, 31, 0.85), rgba(30, 58, 31, 0.7)); }
+        .insta-overlay { background: rgba(27, 51, 34, 0.4); opacity: 0; transition: opacity 0.3s ease; }
+        .insta-card:hover .insta-overlay { opacity: 1; }
+        .drawer-mask { background: rgba(27, 51, 34, 0.7); backdrop-filter: blur(4px); }
+        input:focus, select:focus { outline: none; border-color: #c5a880; }
         [v-cloak] { display: none; }
     </style>
 </head>
-<body class="bg-romanticPink text-freshGreen font-sans antialiased overflow-x-hidden">
+<body class="bg-cream text-emerald font-sans antialiased overflow-x-hidden">
 
-    <!-- Particle Layer -->
-    <div id="petal-container" class="fixed inset-0 pointer-events-none select-none"></div>
+    <!-- Petal Layer (Z-Index 60 to be above everything) -->
+    <div id="petal-container" class="fixed inset-0 z-[60] pointer-events-none select-none"></div>
 
     <!-- Navigation -->
-    <nav class="fixed w-full z-[80] transition-all duration-300 bg-freshGreen/95 backdrop-blur-md border-b border-white/5">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="flex items-center gap-3">
-                <!-- SVG Vector: Crowned Queen Silhouette -->
-                <svg class="w-10 h-10 text-gold" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M50 20L58 35H42L50 20Z" fill="currentColor"/>
-                    <path d="M35 30L42 40H28L35 30Z" fill="currentColor"/>
-                    <path d="M65 30L72 40H58L65 30Z" fill="currentColor"/>
-                    <path d="M50 40C40 40 32 48 32 58C32 68 40 76 50 76C60 76 68 68 68 58C68 48 60 40 50 40ZM50 72C42 72 36 66 36 58C36 50 42 44 50 44C58 44 64 50 64 58C64 66 58 72 50 72Z" fill="currentColor"/>
-                    <path d="M50 78C35 78 25 85 25 95H75C75 85 65 78 50 78Z" fill="currentColor"/>
-                </svg>
-                <span class="font-serif text-2xl tracking-[0.15em] font-bold text-gold">SERAYNA</span>
-            </div>
-            <button onclick="toggleDrawer()" class="hidden md:block bg-gold text-freshGreen px-6 py-2.5 text-xs tracking-widest uppercase font-bold hover:bg-white transition-colors">
-                Tempah Ritual
-            </button>
+    <nav class="fixed w-full z-50 px-6 py-5 flex justify-between items-center bg-emerald/10 backdrop-blur-sm border-b border-white/10">
+        <div class="flex items-center gap-3">
+            <svg class="w-8 h-8 text-gold" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C12 2 7 7 7 12C7 14.7614 9.23858 17 12 17C14.7614 17 17 14.7614 17 12C17 7 12 2 12 2Z opacity-50" />
+                <path d="M12 22C17.5228 22 22 17.5228 22 12C22 10.5 21.5 9.2 20.7 8.1C19.5 9.5 17.8 10.5 16 10.5C13.8 10.5 12 8.7 12 6.5C12 4.7 13 3 14.4 1.8C13.6 1.1 12.8 0.7 12 0.7C5.4 0.7 0 6.1 0 12.7C0 17.8 3.2 22.1 7.7 23.7C8.1 22.7 8.8 22 10 22H12Z" />
+            </svg>
+            <span class="font-serif text-2xl tracking-[0.2em] font-bold text-gold">SERAYNA</span>
         </div>
+        <div class="hidden md:flex space-x-10 text-[10px] tracking-[0.3em] uppercase font-semibold text-cream">
+            <a href="#about" class="hover:text-gold transition-colors">Warisan</a>
+            <a href="#packages" class="hover:text-gold transition-colors">Rawatan</a>
+            <a href="#instagram" class="hover:text-gold transition-colors">Galeri</a>
+        </div>
+        <button onclick="toggleDrawer()" class="bg-gold text-emerald px-6 py-2 text-xs tracking-widest uppercase font-bold hover:bg-cream transition-all">
+            Tempah Slot
+        </button>
     </nav>
 
     <!-- Hero Section -->
-    <section class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
-        <div class="absolute inset-0">
-            <img src="https://images.unsplash.com/photo-1544161515-4ae6ce6db874?auto=format&fit=crop&q=80&w=2000" alt="Spa Background" class="w-full h-full object-cover">
-            <div class="absolute inset-0 hero-overlay"></div>
+    <section class="relative h-screen flex items-center justify-center bg-emerald overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&q=80&w=2000" alt="Spa Background" class="w-full h-full object-cover opacity-40">
         </div>
-        
         <div class="relative z-10 text-center px-6 max-w-4xl">
-            <h1 class="font-serif text-4xl md:text-7xl text-white mb-6 leading-tight font-semibold tracking-wide uppercase">
-                Healing Powers of <br><span class="text-gold italic">Mandi Bunga Serayna</span>
-            </h1>
-            <p class="text-white/90 text-lg md:text-xl font-light mb-10 max-w-2xl mx-auto leading-relaxed">
-                Sanktuari Homespa Studio Khas Untuk Wanita di Setapak, KL. <br>
-                <span class="text-gold font-medium">Hubungi: 016-8677546</span>
+            <span class="text-gold text-xs tracking-[0.4em] uppercase mb-6 block font-bold">Luxury Women-Only Sanctuary</span>
+            <h1 class="font-serif text-5xl md:text-8xl text-cream mb-8 leading-tight">Kembalikan Kesegaran <span class="italic font-light block">Aura & Jiwa Wanita</span></h1>
+            <p class="text-cream/80 text-lg md:text-xl font-light mb-12 max-w-2xl mx-auto leading-relaxed">
+                Sanktuari khas wanita di Kuala Lumpur. Alami keajaiban Ritual Mandi Bunga tradisional untuk ketenangan yang mendalam.
             </p>
-
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
-                <div class="flex flex-col items-center group">
-                    <div class="w-12 h-12 rounded-full border border-gold/30 flex items-center justify-center mb-3 group-hover:bg-gold/10 transition-colors">
-                        <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
-                    </div>
-                    <span class="text-white/80 text-xs uppercase tracking-widest">Naik Aura Seri</span>
-                </div>
-                <div class="flex flex-col items-center group">
-                    <div class="w-12 h-12 rounded-full border border-gold/30 flex items-center justify-center mb-3 group-hover:bg-gold/10 transition-colors">
-                        <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
-                    </div>
-                    <span class="text-white/80 text-xs uppercase tracking-widest">Ketenangan Hati</span>
-                </div>
-                <div class="flex flex-col items-center group">
-                    <div class="w-12 h-12 rounded-full border border-gold/30 flex items-center justify-center mb-3 group-hover:bg-gold/10 transition-colors">
-                        <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
-                    </div>
-                    <span class="text-white/80 text-xs uppercase tracking-widest">Mewangikan Badan</span>
-                </div>
-                <div class="flex flex-col items-center group">
-                    <div class="w-12 h-12 rounded-full border border-gold/30 flex items-center justify-center mb-3 group-hover:bg-gold/10 transition-colors">
-                        <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
-                    </div>
-                    <span class="text-white/80 text-xs uppercase tracking-widest">Tidur Lena</span>
-                </div>
-            </div>
-
-            <button onclick="toggleDrawer()" class="bg-gold hover:bg-white text-freshGreen px-12 py-5 text-sm tracking-widest uppercase font-black transition-all transform hover:scale-105 shadow-2xl">
-                Tempah Slot Ritual Anda
-            </button>
-        </div>
-    </section>
-
-    <!-- Marquee Gallery -->
-    <div class="bg-freshGreen py-10 overflow-hidden border-y border-white/5">
-        <div class="marquee-container">
-            <div class="marquee-content gap-6 px-3">
-                <img src="https://images.unsplash.com/photo-1600334129128-f85237472467?auto=format&fit=crop&q=80&w=300" class="w-[250px] h-[300px] object-cover" alt="Spa 1">
-                <img src="https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&q=80&w=300" class="w-[250px] h-[300px] object-cover" alt="Spa 2">
-                <img src="https://images.unsplash.com/photo-1596178065887-1198b6148b2b?auto=format&fit=crop&q=80&w=300" class="w-[250px] h-[300px] object-cover" alt="Spa 3">
-                <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&q=80&w=300" class="w-[250px] h-[300px] object-cover" alt="Spa 4">
-                <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&q=80&w=300" class="w-[250px] h-[300px] object-cover" alt="Spa 5">
-                <!-- Duplicate for seamless loop -->
-                <img src="https://images.unsplash.com/photo-1600334129128-f85237472467?auto=format&fit=crop&q=80&w=300" class="w-[250px] h-[300px] object-cover" alt="Spa 1">
-                <img src="https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&q=80&w=300" class="w-[250px] h-[300px] object-cover" alt="Spa 2">
-                <img src="https://images.unsplash.com/photo-1596178065887-1198b6148b2b?auto=format&fit=crop&q=80&w=300" class="w-[250px] h-[300px] object-cover" alt="Spa 3">
-                <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&q=80&w=300" class="w-[250px] h-[300px] object-cover" alt="Spa 4">
-                <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&q=80&w=300" class="w-[250px] h-[300px] object-cover" alt="Spa 5">
-            </div>
-        </div>
-    </div>
-
-    <!-- Pricing & Services -->
-    <section class="py-24 px-6 max-w-7xl mx-auto">
-        <div class="grid lg:grid-cols-2 gap-12 items-stretch">
-            <!-- Highlight Card -->
-            <div class="bg-freshGreen text-white p-10 md:p-16 flex flex-col justify-between shadow-2xl">
-                <div>
-                    <span class="text-gold uppercase tracking-[0.3em] text-xs font-bold mb-4 block">Promosi Terhad</span>
-                    <h2 class="font-serif text-4xl md:text-5xl mb-6 leading-tight">Kelas Mandian Bunga</h2>
-                    <p class="text-white/70 text-lg mb-8 font-light">Belajar teknik mandian bunga tradisional untuk amalan sendiri di rumah demi kesegaran aura berpanjangan.</p>
-                </div>
-                <div>
-                    <p class="text-4xl font-serif text-gold mb-8">RM 99 <span class="text-sm font-sans text-white/40 uppercase tracking-widest">Sahaja</span></p>
-                    <button onclick="openBooking('Kelas Mandian Bunga')" class="w-full py-4 border border-gold text-gold hover:bg-gold hover:text-freshGreen transition-all uppercase tracking-[0.2em] text-xs font-bold">Daftar Sekarang</button>
-                </div>
-            </div>
-
-            <!-- Core Service Card -->
-            <div class="bg-white p-10 md:p-16 shadow-xl flex flex-col">
-                <h2 class="font-serif text-4xl text-freshGreen mb-6 leading-tight">Ritual Homespa Studio</h2>
-                <h4 class="text-gold font-bold text-xs uppercase tracking-widest mb-8 italic">(Emotional Reset & Urutan Tubuh)</h4>
-                <div class="space-y-6 mb-12 flex-grow">
-                    <p class="text-freshGreen/70 leading-relaxed italic">Khusus untuk wanita yang sedang mengalami:</p>
-                    <ul class="space-y-4 text-freshGreen/80 font-light">
-                        <li class="flex items-start gap-3">
-                            <span class="text-gold mt-1">•</span> Penat emosi & mental yang melampau
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <span class="text-gold mt-1">•</span> Kerap overthinking & stres kerja/keluarga
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <span class="text-gold mt-1">•</span> Rasa hati berat & tidak dihargai
-                        </li>
-                        <li class="flex items-start gap-3">
-                            <span class="text-gold mt-1">•</span> Keinginan untuk 'reset' energi diri
-                        </li>
-                    </ul>
-                </div>
-                <button onclick="openBooking('Ritual Homespa Studio')" class="w-full py-4 bg-freshGreen text-white hover:bg-gold hover:text-freshGreen transition-all uppercase tracking-[0.2em] text-xs font-bold">Tempah Sesi Healing</button>
+            <div class="flex flex-col md:flex-row gap-4 justify-center">
+                <button onclick="toggleDrawer()" class="bg-gold hover:bg-cream text-emerald px-12 py-5 text-sm tracking-widest uppercase font-bold transition-all transform hover:-translate-y-1">
+                    Tempah Slot Ritual Anda
+                </button>
             </div>
         </div>
     </section>
 
-    <!-- Testimonials -->
-    <section class="py-24 bg-white/30">
-        <div class="max-w-4xl mx-auto px-6 text-center">
-            <h3 class="font-serif text-2xl md:text-3xl italic text-freshGreen/90 mb-12">"Rasa lebih segar, hilang beban dalam diri. Aura rasa lebih ringan selepas ritual."</h3>
-            <div class="flex flex-col items-center">
-                <div class="w-16 h-px bg-gold mb-4"></div>
-                <p class="uppercase tracking-[0.3em] text-xs font-bold text-gold">Liana, Sungai Besi</p>
+    <!-- About Section (Warisan & Jiwa) -->
+    <section id="about" class="py-24 px-6 max-w-7xl mx-auto">
+        <div class="grid md:grid-cols-2 gap-20 items-center">
+            <div class="relative">
+                <div class="aspect-[4/5] overflow-hidden shadow-2xl">
+                    <img src="https://images.unsplash.com/photo-1596178065887-1198b6148b2b?auto=format&fit=crop&q=80&w=1000" alt="Ritual Mandi Bunga" class="w-full h-full object-cover">
+                </div>
+                <div class="absolute -bottom-10 -right-10 bg-emerald p-12 hidden md:block">
+                    <p class="text-gold font-serif italic text-3xl">Warisan & Jiwa</p>
+                </div>
             </div>
+            <div class="space-y-8">
+                <h2 class="font-serif text-4xl md:text-5xl text-emerald leading-snug">Sentuhan Tradisi Dalam <span class="italic">Kemewahan Moden</span></h2>
+                <p class="text-emerald/70 text-lg leading-relaxed font-light">
+                    Di Serayna, kami mengangkat kembali seni penyembuhan Melayu lama. Mandi Bunga bukan sekadar adat, ia adalah terapi jiwa untuk melepaskan bebanan emosi dan mengembalikan seri wajah.
+                </p>
+                <p class="text-emerald/70 text-lg leading-relaxed font-light">
+                    Ruang eksklusif kami direka khas untuk memastikan privasi dan keselesaan setiap wanita yang hadir mencari ketenangan di tengah hiruk-pikuk kota Kuala Lumpur.
+                </p>
+                <div class="pt-6">
+                    <a href="#packages" class="text-gold border-b border-gold pb-2 text-xs tracking-widest uppercase font-bold hover:text-emerald transition-colors">Lihat Pakej Rawatan</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Signature Packages -->
+    <section id="packages" class="bg-emerald py-24 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="font-serif text-cream text-4xl md:text-5xl mb-4 italic">Pakej Signature Kami</h2>
+                <div class="h-px w-24 bg-gold mx-auto"></div>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Package 1 -->
+                <div class="bg-white/5 border border-white/10 p-8 flex flex-col justify-between group hover:bg-white/10 transition-all">
+                    <div>
+                        <h3 class="font-serif text-2xl text-cream mb-2">Ritual Mandi Bunga Aura</h3>
+                        <p class="text-gold font-bold mb-6 italic">RM 180 / 90 Minit</p>
+                        <p class="text-cream/60 text-sm leading-relaxed mb-8">Pembersihan aura menggunakan 7 jenis bunga segar, limau purut, and air doa untuk menaikkan seri dan membuang tenaga negatif.</p>
+                    </div>
+                    <button onclick="openBooking('Ritual Mandi Bunga Aura')" class="w-full py-4 border border-gold/50 text-gold text-xs tracking-widest uppercase font-bold hover:bg-gold hover:text-emerald transition-all">Pilih Rawatan Ini</button>
+                </div>
+
+                <!-- Package 2 -->
+                <div class="bg-gold p-8 flex flex-col justify-between transform md:-translate-y-4 shadow-2xl">
+                    <div>
+                        <h3 class="font-serif text-2xl text-emerald mb-2">Urutan Penyembuhan Tubuh</h3>
+                        <p class="text-emerald/70 font-bold mb-6 italic">RM 150 / 60 Minit</p>
+                        <p class="text-emerald/80 text-sm leading-relaxed mb-8">Urutan tradisional Melayu yang memfokuskan pada titik saraf untuk melancarkan peredaran darah dan melegakan otot yang lesu.</p>
+                    </div>
+                    <button onclick="openBooking('Urutan Penyembuhan Tubuh')" class="w-full py-4 bg-emerald text-cream text-xs tracking-widest uppercase font-bold hover:bg-emerald/90 transition-all">Pilih Rawatan Ini</button>
+                </div>
+
+                <!-- Package 3 -->
+                <div class="bg-white/5 border border-white/10 p-8 flex flex-col justify-between group hover:bg-white/10 transition-all">
+                    <div>
+                        <h3 class="font-serif text-2xl text-cream mb-2">Set Minyak Aura Serayna</h3>
+                        <p class="text-gold font-bold mb-6 italic">RM 85 / Produk Signature</p>
+                        <p class="text-cream/60 text-sm leading-relaxed mb-8">Adunan pati bunga mawar, cendana, dan herba terpilih untuk kegunaan harian bagi mengekalkan ketenangan jiwa di rumah.</p>
+                    </div>
+                    <button onclick="openBooking('Set Minyak Aura Serayna')" class="w-full py-4 border border-gold/50 text-gold text-xs tracking-widest uppercase font-bold hover:bg-gold hover:text-emerald transition-all">Beli Sekarang</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Instagram Gallery -->
+    <section id="instagram" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+                <div>
+                    <h2 class="font-serif text-4xl text-emerald mb-2 italic">Ikuti Kami Di Instagram</h2>
+                    <p class="text-emerald/60 text-sm uppercase tracking-widest">@seraynaspa — Lifestyle & Wellness</p>
+                </div>
+                <a href="https://www.instagram.com/seraynaspa/" target="_blank" class="text-gold font-bold text-xs tracking-widest uppercase border-b-2 border-gold pb-1">Lihat Semua Gambar</a>
+            </div>
+
+            <a href="https://www.instagram.com/seraynaspa/" target="_blank" class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="insta-card relative aspect-square overflow-hidden bg-emerald/5">
+                    <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover" alt="Instagram 1">
+                    <div class="insta-overlay absolute inset-0 flex items-center justify-center text-white">
+                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    </div>
+                </div>
+                <div class="insta-card relative aspect-square overflow-hidden bg-emerald/5">
+                    <img src="https://images.unsplash.com/photo-1544161515-4ae6ce6db874?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover" alt="Instagram 2">
+                    <div class="insta-overlay absolute inset-0 flex items-center justify-center text-white">
+                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    </div>
+                </div>
+                <div class="insta-card relative aspect-square overflow-hidden bg-emerald/5">
+                    <img src="https://images.unsplash.com/photo-1600334129128-f85237472467?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover" alt="Instagram 3">
+                    <div class="insta-overlay absolute inset-0 flex items-center justify-center text-white">
+                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    </div>
+                </div>
+                <div class="insta-card relative aspect-square overflow-hidden bg-emerald/5">
+                    <img src="https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&q=80&w=800" class="w-full h-full object-cover" alt="Instagram 4">
+                    <div class="insta-overlay absolute inset-0 flex items-center justify-center text-white">
+                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    </div>
+                </div>
+            </a>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-freshGreen text-white py-20 px-6">
-        <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-16 border-b border-white/5 pb-16 mb-8">
+    <footer class="bg-emerald text-cream py-16 px-6">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-16 border-b border-white/10 pb-16 mb-12">
             <div>
-                <div class="font-serif text-3xl text-gold mb-6 tracking-wider italic">SERAYNA.</div>
-                <p class="text-white/50 font-light leading-relaxed">Pusat pemulihan aura dan ketenangan jiwa wanita melalui khazanah mandian bunga tradisional.</p>
-            </div>
-            <div>
-                <h4 class="text-xs font-bold uppercase tracking-[0.3em] text-gold mb-8">Lokasi Kami</h4>
-                <p class="text-white/70 font-light">Setapak, Kuala Lumpur (Homespa Studio)<br>Eksklusif untuk wanita sahaja.</p>
-            </div>
-            <div>
-                <h4 class="text-xs font-bold uppercase tracking-[0.3em] text-gold mb-8">Hubungi</h4>
-                <a href="tel:60168677546" class="block text-xl font-light hover:text-gold transition-colors">016-8677546</a>
-                <div class="flex gap-4 mt-6">
-                    <a href="#" class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:border-gold transition-colors text-white/40 hover:text-gold italic">ig</a>
-                    <a href="#" class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:border-gold transition-colors text-white/40 hover:text-gold italic">fb</a>
+                <div class="flex items-center gap-3 mb-6">
+                    <span class="font-serif text-3xl tracking-widest text-gold italic">SERAYNA</span>
                 </div>
+                <p class="text-cream/50 font-light leading-relaxed">
+                    Kami meraikan kecantikan dalaman wanita melalui ritual tradisional Melayu yang dikuras khas. Sanctuary untuk anda rehat dan pulih.
+                </p>
+            </div>
+            <div>
+                <h4 class="text-gold font-bold text-xs tracking-[0.3em] uppercase mb-8">Lokasi Kami</h4>
+                <p class="text-cream/70 font-light">
+                    Level 15, Menara Wellness<br>
+                    Jalan Bukit Bintang, 55100<br>
+                    Kuala Lumpur, Malaysia
+                </p>
+            </div>
+            <div>
+                <h4 class="text-gold font-bold text-xs tracking-[0.3em] uppercase mb-8">Hubungi Kami</h4>
+                <p class="text-cream/70 font-light mb-4">Waktu Operasi: 10AM – 8PM (Setiap Hari)</p>
+                <a href="https://wa.me/60123456789" class="text-cream font-bold hover:text-gold transition-colors underline underline-offset-8">WhatsApp Kami</a>
             </div>
         </div>
-        <p class="text-center text-[10px] uppercase tracking-widest text-white/20">© 2024 Serayna Spa Studio. All rights reserved.</p>
+        <p class="text-center text-[10px] uppercase tracking-widest text-cream/30">© 2024 Serayna Spa. Hak Cipta Terpelihara.</p>
     </footer>
 
     <!-- Booking Drawer -->
     <div id="bookingDrawer" class="fixed inset-0 z-[100] hidden">
-        <div class="absolute inset-0 bg-freshGreen/80 backdrop-blur-sm" onclick="toggleDrawer()"></div>
-        <div class="absolute right-0 top-0 h-full w-full max-w-md bg-romanticPink p-10 shadow-2xl flex flex-col">
+        <div class="drawer-mask absolute inset-0" onclick="toggleDrawer()"></div>
+        <div id="drawerBody" class="absolute right-0 top-0 h-full w-full max-w-md bg-cream shadow-2xl transform translate-x-full transition-transform duration-500 ease-in-out p-10 flex flex-col">
             <div class="flex justify-between items-center mb-12">
                 <h2 class="font-serif text-3xl italic">Ritual Inquiry</h2>
-                <button onclick="toggleDrawer()" class="text-freshGreen hover:rotate-90 transition-transform">
-                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"/></svg>
+                <button onclick="toggleDrawer()" class="text-emerald hover:rotate-90 transition-transform">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
                 </button>
             </div>
 
-            <form id="bookingForm" class="space-y-6 flex-1 overflow-y-auto">
+            <form id="bookingForm" class="space-y-6">
                 <div>
                     <label class="block text-[10px] uppercase tracking-widest font-bold mb-2">Nama Penuh</label>
-                    <input type="text" id="name" required class="w-full bg-freshGreen/5 border-b border-freshGreen/20 py-3 text-lg font-light focus:border-gold outline-none transition-colors">
+                    <input type="text" id="name" required class="w-full bg-emerald/5 border-b border-emerald/20 p-3 text-lg font-light">
                 </div>
                 <div>
-                    <label class="block text-[10px] uppercase tracking-widest font-bold mb-2">Jenis Rawatan</label>
-                    <select id="ritual" required class="w-full bg-freshGreen/5 border-b border-freshGreen/20 py-3 text-lg font-light focus:border-gold outline-none transition-colors appearance-none">
-                        <option value="Ritual Homespa Studio">Ritual Homespa Studio</option>
-                        <option value="Kelas Mandian Bunga">Kelas Mandian Bunga</option>
-                        <option value="Inquiry Umum">Inquiry Umum</option>
+                    <label class="block text-[10px] uppercase tracking-widest font-bold mb-2">No. Telefon (WhatsApp)</label>
+                    <input type="tel" id="phone" placeholder="60123456789" required class="w-full bg-emerald/5 border-b border-emerald/20 p-3 text-lg font-light">
+                </div>
+                <div>
+                    <label class="block text-[10px] uppercase tracking-widest font-bold mb-2">Rawatan Pilihan</label>
+                    <select id="package" required class="w-full bg-emerald/5 border-b border-emerald/20 p-3 text-lg font-light">
+                        <option value="Ritual Mandi Bunga Aura">Ritual Mandi Bunga Aura</option>
+                        <option value="Urutan Penyembuhan Tubuh">Urutan Penyembuhan Tubuh</option>
+                        <option value="Set Minyak Aura Serayna">Set Minyak Aura Serayna</option>
                     </select>
                 </div>
-                <div class="pt-8">
-                    <button type="submit" class="w-full bg-freshGreen text-white py-5 text-sm tracking-[0.2em] uppercase font-bold hover:bg-gold transition-all shadow-xl">
-                        Kirim ke WhatsApp
-                    </button>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-[10px] uppercase tracking-widest font-bold mb-2">Tarikh</label>
+                        <input type="date" id="date" required class="w-full bg-emerald/5 border-b border-emerald/20 p-3 text-sm font-light">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] uppercase tracking-widest font-bold mb-2">Masa</label>
+                        <input type="time" id="time" required class="w-full bg-emerald/5 border-b border-emerald/20 p-3 text-sm font-light">
+                    </div>
                 </div>
+                <button type="submit" class="w-full bg-emerald text-cream py-5 text-sm tracking-[0.2em] uppercase font-bold hover:bg-gold hover:text-emerald transition-all shadow-xl">
+                    Kirim Tempahan
+                </button>
             </form>
+
+            <div id="confirmState" class="hidden text-center py-20 animate-fade-in">
+                <div class="w-20 h-20 bg-gold/20 rounded-full flex items-center justify-center mx-auto mb-6 text-gold">
+                    <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                </div>
+                <h3 class="font-serif text-3xl mb-4 italic">Terima Kasih</h3>
+                <p class="text-emerald/60 font-light mb-8">Tempahan anda sedang diproses. Sila tunggu seketika untuk diarahkan ke WhatsApp kami.</p>
+            </div>
         </div>
     </div>
 
     <script>
-        // Particle Generator (Falling Petals)
+        // Petal Particle Effect
         const petalContainer = document.getElementById('petal-container');
+        const petalColors = ['#ffd1dc', '#ffb7c5', '#c5a88066'];
+
         function createPetal() {
             const petal = document.createElement('div');
-            const size = Math.random() * 10 + 10 + 'px';
-            const duration = Math.random() * 3 + 5 + 's';
+            const size = Math.random() * 15 + 10 + 'px';
+            const duration = Math.random() * 4 + 6 + 's';
             
             petal.className = 'petal';
             petal.style.width = size;
             petal.style.height = size;
             petal.style.left = Math.random() * 100 + 'vw';
             petal.style.animationDuration = duration;
+            petal.style.background = petalColors[Math.floor(Math.random() * petalColors.length)];
             
             petalContainer.appendChild(petal);
-            setTimeout(() => petal.remove(), 8000);
+
+            setTimeout(() => {
+                petal.remove();
+            }, 10000);
         }
+
         setInterval(createPetal, 400);
 
-        // Drawer Mechanics
+        // Drawer Logic
         const drawer = document.getElementById('bookingDrawer');
-        
+        const drawerBody = document.getElementById('drawerBody');
+        const form = document.getElementById('bookingForm');
+        const confirmState = document.getElementById('confirmState');
+
         function toggleDrawer() {
-            drawer.classList.toggle('hidden');
-            if(!drawer.classList.contains('hidden')) {
-                document.body.style.overflow = 'hidden';
+            if (drawer.classList.contains('hidden')) {
+                drawer.classList.remove('hidden');
+                setTimeout(() => {
+                    drawerBody.classList.remove('translate-x-full');
+                }, 10);
             } else {
-                document.body.style.overflow = 'auto';
+                drawerBody.classList.add('translate-x-full');
+                setTimeout(() => {
+                    drawer.classList.add('hidden');
+                    resetForm();
+                }, 500);
             }
         }
 
         function openBooking(pkg) {
-            document.getElementById('ritual').value = pkg;
+            document.getElementById('package').value = pkg;
             toggleDrawer();
         }
 
-        // WhatsApp Logic
-        document.getElementById('bookingForm').addEventListener('submit', function(e) {
+        function resetForm() {
+            form.classList.remove('hidden');
+            confirmState.classList.add('hidden');
+            form.reset();
+        }
+
+        form.addEventListener('submit', function(e) {
             e.preventDefault();
-            const name = document.getElementById('name').value;
-            const ritual = document.getElementById('ritual').value;
-            const phone = "60168677546";
             
-            const message = `Salam Serayna Spa, saya nak booking ritual:%0A%0ANama: ${name}%0ARawatan: ${ritual}%0A%0ASaya berminat untuk dapatkan slot segera.`;
+            const data = {
+                name: document.getElementById('name').value,
+                phone: document.getElementById('phone').value,
+                pkg: document.getElementById('package').value,
+                date: document.getElementById('date').value,
+                time: document.getElementById('time').value
+            };
+
+            form.classList.add('hidden');
+            confirmState.classList.remove('hidden');
+
+            const text = `Hi Serayna Spa, saya nak booking ritual:%0A%0ANama: ${data.name}%0APhone: ${data.phone}%0ARawatan: ${data.pkg}%0ATarikh: ${data.date}%0AMasa: ${data.time}`;
             
-            window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
+            setTimeout(() => {
+                window.open(`https://wa.me/60123456789?text=${text}`, '_blank');
+                toggleDrawer();
+            }, 2000);
         });
     </script>
 </body>
