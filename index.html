@@ -1,28 +1,21 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="ms" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Serayna Spa | Luxury Women-Only Mandi Bunga & Soul Care</title>
-    <meta name="description" content="Traditional Malay wellness and Mandi Bunga rituals for the modern woman in Kuala Lumpur.">
-    
-    <!-- Typography -->
+    <title>Serayna Spa | Kembalikan Kesegaran Aura & Jiwa Wanita</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,500&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        emerald: '#1B3022',
-                        olive: '#2D4F3E',
-                        cream: '#FDFBF7',
-                        gold: '#C5A059',
-                        rose: '#D4A373',
+                        emerald: '#1b3322',
+                        cream: '#faf6f0',
+                        gold: '#c5a880',
                     },
                     fontFamily: {
                         serif: ['Playfair Display', 'serif'],
@@ -32,326 +25,258 @@
             }
         }
     </script>
-
     <style>
-        .glass-nav { background: rgba(253, 251, 247, 0.85); backdrop-filter: blur(10px); }
-        .hero-gradient { background: linear-gradient(rgba(27, 48, 34, 0.4), rgba(27, 48, 34, 0.4)); }
-        .ritual-card:hover .card-img { transform: scale(1.05); }
-        input:focus, select:focus { outline: none; border-color: #C5A059; }
-        .modal-overlay { background: rgba(27, 48, 34, 0.9); }
-        [v-cloak] { display: none; }
+        .petal {
+            position: fixed;
+            background-color: #ffc0cb;
+            border-radius: 150% 0 150% 0;
+            opacity: 0.6;
+            pointer-events: none;
+            z-index: 99;
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            0% { transform: translateY(-10vh) translateX(0) rotate(0deg); opacity: 0.8; }
+            100% { transform: translateY(105vh) translateX(100px) rotate(360deg); opacity: 0; }
+        }
+        .drawer-overlay { background: rgba(27, 51, 34, 0.8); backdrop-filter: blur(4px); }
+        .ritual-card { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .ritual-card:hover { transform: translateY(-8px); }
     </style>
 </head>
-<body class="bg-cream text-olive font-sans antialiased overflow-x-hidden">
+<body class="bg-cream text-emerald font-sans antialiased overflow-x-hidden">
+
+    <!-- Petal Container -->
+    <div id="petal-container" class="fixed inset-0 pointer-events-none select-none"></div>
 
     <!-- Navigation -->
-    <nav class="fixed w-full z-50 glass-nav border-b border-olive/5">
-        <div class="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
-            <a href="#" class="font-serif text-2xl tracking-widest uppercase text-emerald">Serayna</a>
-            <div class="hidden md:flex space-x-10 text-xs tracking-widest uppercase font-medium">
-                <a href="#heritage" class="hover:text-gold transition-colors">The Heritage</a>
-                <a href="#rituals" class="hover:text-gold transition-colors">Rituals</a>
-                <a href="#testimonials" class="hover:text-gold transition-colors">Client Notes</a>
-            </div>
-            <button onclick="toggleModal()" class="bg-emerald text-cream px-6 py-2.5 text-xs tracking-widest uppercase hover:bg-olive transition-all">
-                Reserve Ritual
-            </button>
-        </div>
+    <nav class="fixed w-full z-50 px-6 py-4 flex justify-between items-center bg-cream/80 backdrop-blur-md border-b border-emerald/5">
+        <div class="text-2xl font-serif tracking-widest uppercase italic font-semibold">Serayna</div>
+        <button onclick="toggleDrawer()" class="bg-emerald text-cream px-6 py-2 text-sm tracking-widest uppercase font-medium hover:bg-gold hover:text-emerald transition-all duration-300">
+            Tempah Slot
+        </button>
     </nav>
 
     <!-- Hero Section -->
-    <section class="relative h-screen flex items-center justify-center overflow-hidden">
-        <div class="absolute inset-0 z-0">
-            <!-- Placeholder for high-end spa video/image -->
-            <img src="https://images.unsplash.com/photo-1544161515-4ae6ce6db874?auto=format&fit=crop&q=80&w=2000" alt="Spa Background" class="w-full h-full object-cover">
-            <div class="absolute inset-0 hero-gradient"></div>
-        </div>
-        
-        <div class="relative z-10 text-center px-6 max-w-4xl">
-            <span class="text-cream/80 text-xs tracking-[0.3em] uppercase mb-6 block font-medium">A Sanctuary for the Soul</span>
-            <h1 class="font-serif text-5xl md:text-7xl text-cream mb-8 leading-tight italic">Reclaim your radiance through the <span class="block">Art of Mandi Bunga.</span></h1>
-            <p class="text-cream/90 text-lg md:text-xl font-light mb-10 max-w-2xl mx-auto leading-relaxed">
-                Traditional aura flower baths and holistic wellness tailored for the modern woman. Experience a ritual of deep renewal in the heart of Kuala Lumpur.
+    <section class="relative min-h-screen flex items-center justify-center bg-emerald text-cream px-6 overflow-hidden pt-20">
+        <div class="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/natural-paper.png')]"></div>
+        <div class="relative z-10 text-center max-w-4xl">
+            <span class="block text-gold uppercase tracking-[0.3em] text-xs mb-4 font-bold">Women-Only Sanctuary • Kuala Lumpur</span>
+            <h1 class="font-serif text-5xl md:text-7xl mb-8 leading-[1.1]">Kembalikan Kesegaran <span class="italic font-light">Aura & Jiwa</span> Wanita</h1>
+            <p class="text-lg md:text-xl text-cream/80 font-light max-w-2xl mx-auto mb-10 leading-relaxed">
+                Nikmati keajaiban Mandi Bunga tradisional dalam suasana spa mewah yang eksklusif untuk wanita sahaja. Rehatkan minda, segarkan raga.
             </p>
-            <button onclick="toggleModal()" class="inline-block bg-gold hover:bg-gold/90 text-emerald px-10 py-4 text-sm tracking-widest uppercase font-bold transition-all transform hover:-translate-y-1">
-                Reserve Your Ritual
+            <button onclick="toggleDrawer()" class="bg-gold text-emerald px-10 py-4 text-sm font-bold uppercase tracking-widest hover:scale-105 transition-transform">
+                Tempah Slot Ritual Anda
             </button>
         </div>
     </section>
 
-    <!-- The Heritage (About) -->
-    <section id="heritage" class="py-24 px-6 max-w-7xl mx-auto">
-        <div class="grid md:grid-cols-2 gap-20 items-center">
-            <div class="relative">
-                <div class="aspect-[4/5] overflow-hidden border border-gold/20 p-4">
-                    <img src="https://images.unsplash.com/photo-1596178065887-1198b6148b2b?auto=format&fit=crop&q=80&w=1000" alt="Traditional Flowers" class="w-full h-full object-cover shadow-2xl">
-                </div>
-                <div class="absolute -bottom-8 -right-8 bg-olive p-10 hidden md:block">
-                    <p class="text-cream font-serif italic text-2xl">Modern Heritage.</p>
-                </div>
+    <!-- About Section -->
+    <section class="py-24 px-6 md:px-12 max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+        <div class="relative">
+            <div class="aspect-[4/5] bg-emerald/10 overflow-hidden shadow-2xl">
+                <img src="https://images.unsplash.com/photo-1544161515-4ae6ce6db874?auto=format&fit=crop&q=80&w=1000" alt="Spa Ambience" class="w-full h-full object-cover grayscale-[20%]">
             </div>
-            <div>
-                <h2 class="font-serif text-4xl md:text-5xl mb-8 leading-snug">Ancient Wisdom for the <span class="italic">Modern Woman</span></h2>
-                <div class="space-y-6 text-olive/80 leading-relaxed text-lg font-light">
-                    <p>Serayna is more than a spa; it is a dedicated sanctuary for women-only healing. We believe in the profound connection between the spirit and the skin, utilizing the centuries-old Malay practice of Mandi Bunga to cleanse the aura and restore inner balance.</p>
-                    <p>Located in a discreet, luxury setting in Kuala Lumpur, our rituals combine premium botanicals, traditional massage techniques, and the intentional use of fresh blooms to evoke a state of total tranquility.</p>
-                </div>
-                <div class="mt-10 pt-10 border-t border-olive/10 flex gap-8 items-center">
-                    <div>
-                        <span class="block text-2xl font-serif text-gold">100%</span>
-                        <span class="text-[10px] uppercase tracking-widest">Natural Flora</span>
-                    </div>
-                    <div class="w-px h-10 bg-olive/10"></div>
-                    <div>
-                        <span class="block text-2xl font-serif text-gold">Solo</span>
-                        <span class="text-[10px] uppercase tracking-widest">Ritual Rooms</span>
-                    </div>
-                </div>
+            <div class="absolute -bottom-6 -right-6 bg-gold p-8 hidden md:block">
+                <p class="font-serif italic text-emerald text-2xl">Warisan & Jiwa</p>
             </div>
+        </div>
+        <div class="space-y-6">
+            <h2 class="font-serif text-4xl md:text-5xl text-emerald">Tempat Berteduh <span class="italic font-light">Khas Untuk Anda.</span></h2>
+            <p class="text-emerald/80 text-lg leading-relaxed">
+                Di Serayna Spa, kami percaya bahawa kecantikan sejati bermula dari ketenangan dalaman. Menggabungkan herba tradisional Melayu dengan sentuhan moden minimalist, kami menyediakan ruang selamat (safe space) untuk anda melepaskan segala penat lelah.
+            </p>
+            <p class="text-emerald/80 text-lg leading-relaxed">
+                Setiap titisan air mandian bunga kami dipilih rapi mengikut adat untuk memastikan aura anda kembali bersinar dan bertenaga.
+            </p>
         </div>
     </section>
 
-    <!-- Signature Rituals (Services) -->
-    <section id="rituals" class="bg-emerald py-24 px-6">
+    <!-- Rituals Section -->
+    <section class="py-24 bg-white/50 border-y border-emerald/5 px-6">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-16">
-                <h2 class="font-serif text-cream text-4xl md:text-5xl mb-4 italic">The Signature Rituals</h2>
-                <p class="text-cream/60 tracking-widest uppercase text-xs">Heal. Restore. Bloom.</p>
+                <h2 class="font-serif text-4xl mb-4">Pakej Rawatan</h2>
+                <div class="h-1 w-20 bg-gold mx-auto"></div>
             </div>
             
             <div class="grid md:grid-cols-3 gap-8">
                 <!-- Ritual 1 -->
-                <div class="ritual-card group bg-olive/30 border border-cream/10 p-2 overflow-hidden">
-                    <div class="aspect-[3/4] overflow-hidden mb-6">
-                        <img src="https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?auto=format&fit=crop&q=80&w=800" alt="Mandi Bunga" class="card-img w-full h-full object-cover transition-transform duration-700">
-                    </div>
-                    <div class="px-4 pb-6">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3 class="font-serif text-cream text-2xl">Signature Mandi Bunga</h3>
-                            <span class="text-gold font-medium">RM 280</span>
+                <div class="ritual-card bg-cream p-8 border border-emerald/5 flex flex-col justify-between">
+                    <div>
+                        <h3 class="font-serif text-2xl mb-2">Ritual Mandi Bunga Aura</h3>
+                        <div class="flex items-center gap-4 text-sm text-gold font-bold mb-4">
+                            <span>RM 180</span>
+                            <span class="w-1 h-1 rounded-full bg-gold/50"></span>
+                            <span>90 Minit</span>
                         </div>
-                        <p class="text-cream/60 text-sm mb-6 flex items-center">
-                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                            90 Minutes
-                        </p>
-                        <p class="text-cream/80 text-sm mb-8 font-light leading-relaxed">A powerful aura-cleansing bath with 7 varieties of fresh blooms, kaffir lime, and prayer-infused water.</p>
-                        <button onclick="openBooking('Signature Mandi Bunga Ritual')" class="w-full py-4 border border-gold/40 text-gold text-xs tracking-widest uppercase hover:bg-gold hover:text-emerald transition-all font-bold">Book This Slot</button>
+                        <p class="text-emerald/70 text-sm leading-relaxed mb-8">Pembersihan jiwa dengan 7 jenis bunga segar untuk menaikkan seri wajah dan membuang tenaga negatif.</p>
                     </div>
+                    <button onclick="toggleDrawer('Ritual Mandi Bunga Aura')" class="w-full py-3 border border-emerald text-xs font-bold uppercase tracking-widest hover:bg-emerald hover:text-cream transition-all">Pilih Slot Ini</button>
                 </div>
 
                 <!-- Ritual 2 -->
-                <div class="ritual-card group bg-olive/30 border border-cream/10 p-2 overflow-hidden">
-                    <div class="aspect-[3/4] overflow-hidden mb-6">
-                        <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&q=80&w=800" alt="Aura Body Healing" class="card-img w-full h-full object-cover transition-transform duration-700">
-                    </div>
-                    <div class="px-4 pb-6">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3 class="font-serif text-cream text-2xl">Aura Body Healing</h3>
-                            <span class="text-gold font-medium">RM 350</span>
+                <div class="ritual-card bg-emerald text-cream p-8 flex flex-col justify-between shadow-xl">
+                    <div>
+                        <h3 class="font-serif text-2xl mb-2">Urutan Penyembuhan</h3>
+                        <div class="flex items-center gap-4 text-sm text-gold font-bold mb-4">
+                            <span>RM 150</span>
+                            <span class="w-1 h-1 rounded-full bg-gold/50"></span>
+                            <span>60 Minit</span>
                         </div>
-                        <p class="text-cream/60 text-sm mb-6 flex items-center">
-                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                            120 Minutes
-                        </p>
-                        <p class="text-cream/80 text-sm mb-8 font-light leading-relaxed">Deep tissue Malay massage followed by a floral scrub and a grounding herbal soak to release emotional blockages.</p>
-                        <button onclick="openBooking('Aura Body Healing')" class="w-full py-4 border border-gold/40 text-gold text-xs tracking-widest uppercase hover:bg-gold hover:text-emerald transition-all font-bold">Book This Slot</button>
+                        <p class="text-cream/70 text-sm leading-relaxed mb-8">Urutan tradisional Melayu yang memfokuskan pada titik saraf untuk melancarkan darah dan hilangkan lesu badan.</p>
                     </div>
+                    <button onclick="toggleDrawer('Urutan Penyembuhan Tubuh')" class="w-full py-3 bg-gold text-emerald text-xs font-bold uppercase tracking-widest hover:bg-cream transition-all border-none">Pilih Slot Ini</button>
                 </div>
 
-                <!-- Product 3 -->
-                <div class="ritual-card group bg-olive/30 border border-cream/10 p-2 overflow-hidden">
-                    <div class="aspect-[3/4] overflow-hidden mb-6">
-                        <img src="https://images.unsplash.com/photo-1617897903246-719242758050?auto=format&fit=crop&q=80&w=800" alt="Soulmate Minyak Aura" class="card-img w-full h-full object-cover transition-transform duration-700">
-                    </div>
-                    <div class="px-4 pb-6">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3 class="font-serif text-cream text-2xl">Minyak Aura Gold</h3>
-                            <span class="text-gold font-medium">RM 120</span>
+                <!-- Ritual 3 -->
+                <div class="ritual-card bg-cream p-8 border border-emerald/5 flex flex-col justify-between">
+                    <div>
+                        <h3 class="font-serif text-2xl mb-2">Set Minyak Aura Serayna</h3>
+                        <div class="flex items-center gap-4 text-sm text-gold font-bold mb-4">
+                            <span>RM 85</span>
+                            <span class="w-1 h-1 rounded-full bg-gold/50"></span>
+                            <span>Home Care</span>
                         </div>
-                        <p class="text-cream/60 text-sm mb-6 flex items-center">
-                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
-                            60ml Apothecary Bottle
-                        </p>
-                        <p class="text-cream/80 text-sm mb-8 font-light leading-relaxed">Our signature soul-care oil. Infused with jasmine, sandalwood, and 24k gold flakes for daily aura maintenance.</p>
-                        <button onclick="openBooking('Soulmate Minyak Aura Product')" class="w-full py-4 border border-gold/40 text-gold text-xs tracking-widest uppercase hover:bg-gold hover:text-emerald transition-all font-bold">Inquire to Purchase</button>
+                        <p class="text-emerald/70 text-sm leading-relaxed mb-8">Minyak aromaterapi signature yang diadun dengan pati bunga mawar dan cendana untuk ketenangan di rumah.</p>
                     </div>
+                    <button onclick="toggleDrawer('Set Minyak Aura Serayna')" class="w-full py-3 border border-emerald text-xs font-bold uppercase tracking-widest hover:bg-emerald hover:text-cream transition-all">Pilih Slot Ini</button>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials -->
-    <section id="testimonials" class="py-24 px-6 overflow-hidden">
-        <div class="max-w-4xl mx-auto text-center">
-            <h2 class="font-serif text-3xl mb-16 italic">Voices of Rejuvenation</h2>
-            <div class="relative px-12">
-                <blockquote class="text-2xl md:text-3xl font-light italic text-olive leading-relaxed mb-8">
-                    "The Mandi Bunga ritual at Serayna was transformative. I walked in feeling heavy and left feeling like my soul had been washed clean. It is truly a sacred space for women."
-                </blockquote>
-                <cite class="text-xs tracking-[0.3em] uppercase font-bold text-gold not-italic">— Sarah H., Kuala Lumpur</cite>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-cream border-t border-olive/5 py-16 px-6">
-        <div class="max-w-7xl mx-auto grid md:grid-cols-4 gap-12">
-            <div class="col-span-2">
-                <a href="#" class="font-serif text-3xl tracking-widest uppercase text-emerald mb-6 block">Serayna</a>
-                <p class="text-olive/60 font-light max-w-xs mb-8">Traditional Malay wellness and soul-care rituals designed exclusively for the feminine spirit.</p>
-                <div class="flex space-x-6">
-                    <a href="#" class="text-olive hover:text-gold transition-colors underline underline-offset-8 text-xs tracking-widest">INSTAGRAM</a>
-                    <a href="#" class="text-olive hover:text-gold transition-colors underline underline-offset-8 text-xs tracking-widest">FACEBOOK</a>
-                </div>
+    <footer class="bg-emerald text-cream py-16 px-6">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center border-b border-cream/10 pb-12 mb-8">
+            <div class="mb-8 md:mb-0">
+                <div class="text-3xl font-serif italic mb-4">Serayna.</div>
+                <p class="text-cream/60 max-w-sm font-light">Santun tradisi dalam kemewahan moden. Destinasi pemulihan aura wanita pertama di Kuala Lumpur.</p>
             </div>
-            <div>
-                <h4 class="text-xs font-bold tracking-widest uppercase mb-6">Location</h4>
-                <address class="text-olive/60 font-light not-italic text-sm leading-relaxed">
-                    Serayna Wellness Sanctuary<br>
-                    Jalan Bukit Bintang, Pavilion Area<br>
-                    55100 Kuala Lumpur, Malaysia
-                </address>
-            </div>
-            <div>
-                <h4 class="text-xs font-bold tracking-widest uppercase mb-6">Hours</h4>
-                <p class="text-olive/60 font-light text-sm">
-                    Tues — Sun: 10AM – 8PM<br>
-                    Monday: Closed
-                </p>
-                <a href="https://wa.me/60123456789" class="mt-6 inline-block text-gold text-sm font-medium hover:underline">Chat via WhatsApp</a>
+            <div class="flex gap-8">
+                <a href="#" class="hover:text-gold transition-colors">Instagram</a>
+                <a href="#" class="hover:text-gold transition-colors">WhatsApp</a>
             </div>
         </div>
-        <div class="max-w-7xl mx-auto mt-16 pt-8 border-t border-olive/5 text-center">
-            <p class="text-[10px] text-olive/40 tracking-widest uppercase">© 2024 Serayna Spa. All Rights Reserved.</p>
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between text-[10px] uppercase tracking-widest font-bold text-cream/40">
+            <p>&copy; 2023 Serayna Spa Management. Hak Cipta Terpelihara.</p>
+            <p>Bukit Bintang, Kuala Lumpur</p>
         </div>
     </footer>
 
-    <!-- Booking Modal (Drawer Logic) -->
-    <div id="bookingModal" class="fixed inset-0 z-[60] hidden">
-        <div class="modal-overlay absolute inset-0 transition-opacity" onclick="toggleModal()"></div>
-        <div class="absolute right-0 top-0 h-full w-full md:w-[500px] bg-cream shadow-2xl p-10 transform translate-x-full transition-transform duration-500 ease-in-out" id="modalContent">
-            <div class="flex justify-between items-center mb-12">
-                <h2 class="font-serif text-3xl italic">Ritual Inquiry</h2>
-                <button onclick="toggleModal()" class="text-olive hover:text-gold">
-                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"></path></svg>
-                </button>
-            </div>
+    <!-- Booking Drawer -->
+    <div id="booking-drawer" class="fixed inset-0 z-[100] hidden">
+        <div class="drawer-overlay absolute inset-0" onclick="toggleDrawer()"></div>
+        <div id="drawer-content" class="absolute right-0 top-0 h-full w-full max-w-md bg-cream shadow-2xl transform translate-x-full transition-transform duration-500 ease-in-out">
+            <div class="p-8 h-full flex flex-col">
+                <div class="flex justify-between items-center mb-10">
+                    <h2 class="font-serif text-3xl italic">Tempahan Slot</h2>
+                    <button onclick="toggleDrawer()" class="text-emerald hover:rotate-90 transition-transform">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    </button>
+                </div>
 
-            <!-- Inquiry Form -->
-            <form id="bookingForm" class="space-y-6">
-                <div>
-                    <label class="block text-[10px] uppercase tracking-widest font-bold mb-2">Full Name</label>
-                    <input type="text" id="name" required class="w-full bg-transparent border-b border-olive/20 py-3 text-lg font-light focus:border-gold transition-colors">
-                </div>
-                <div>
-                    <label class="block text-[10px] uppercase tracking-widest font-bold mb-2">WhatsApp Phone Number</label>
-                    <input type="tel" id="phone" placeholder="+60" required class="w-full bg-transparent border-b border-olive/20 py-3 text-lg font-light focus:border-gold transition-colors">
-                </div>
-                <div>
-                    <label class="block text-[10px] uppercase tracking-widest font-bold mb-2">Selected Ritual</label>
-                    <select id="ritual" required class="w-full bg-transparent border-b border-olive/20 py-3 text-lg font-light focus:border-gold transition-colors appearance-none">
-                        <option value="">Choose a ritual</option>
-                        <option value="Signature Mandi Bunga Ritual">Signature Mandi Bunga Ritual</option>
-                        <option value="Aura Body Healing">Aura Body Healing</option>
-                        <option value="Soulmate Minyak Aura Product">Soulmate Minyak Aura Product</option>
-                    </select>
-                </div>
-                <div class="grid grid-cols-2 gap-6">
+                <form id="bookingForm" class="space-y-6 flex-1 overflow-y-auto pr-2">
                     <div>
-                        <label class="block text-[10px] uppercase tracking-widest font-bold mb-2">Preferred Date</label>
-                        <input type="date" id="date" required class="w-full bg-transparent border-b border-olive/20 py-3 text-sm font-light focus:border-gold transition-colors">
+                        <label class="block text-[10px] uppercase tracking-widest font-bold mb-2">Nama Penuh</label>
+                        <input type="text" id="form-nama" required class="w-full bg-emerald/5 border-b border-emerald/20 p-3 focus:outline-none focus:border-gold transition-colors">
                     </div>
                     <div>
-                        <label class="block text-[10px] uppercase tracking-widest font-bold mb-2">Preferred Time</label>
-                        <select id="time" required class="w-full bg-transparent border-b border-olive/20 py-3 text-sm font-light focus:border-gold transition-colors">
-                            <option value="Morning (10am-1pm)">Morning</option>
-                            <option value="Afternoon (2pm-5pm)">Afternoon</option>
-                            <option value="Evening (5pm-8pm)">Evening</option>
+                        <label class="block text-[10px] uppercase tracking-widest font-bold mb-2">No. Telefon (WhatsApp)</label>
+                        <input type="tel" id="form-tel" required placeholder="0123456789" class="w-full bg-emerald/5 border-b border-emerald/20 p-3 focus:outline-none focus:border-gold transition-colors">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] uppercase tracking-widest font-bold mb-2">Jenis Rawatan</label>
+                        <select id="form-ritual" class="w-full bg-emerald/5 border-b border-emerald/20 p-3 focus:outline-none focus:border-gold transition-colors appearance-none">
+                            <option value="Ritual Mandi Bunga Aura">Ritual Mandi Bunga Aura</option>
+                            <option value="Urutan Penyembuhan Tubuh">Urutan Penyembuhan Tubuh</option>
+                            <option value="Set Minyak Aura Serayna">Set Minyak Aura Serayna</option>
                         </select>
                     </div>
-                </div>
-
-                <button type="submit" class="w-full mt-12 bg-emerald text-cream py-5 text-xs tracking-widest uppercase font-bold hover:bg-olive transition-all shadow-xl">
-                    Request Booking
-                </button>
-            </form>
-
-            <!-- Success State -->
-            <div id="successState" class="hidden text-center py-20 animate-fade-in">
-                <div class="mb-8 flex justify-center">
-                    <div class="w-20 h-20 bg-olive/5 rounded-full flex items-center justify-center text-gold">
-                        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 13l4 4L19 7"></path></svg>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-[10px] uppercase tracking-widest font-bold mb-2">Tarikh</label>
+                            <input type="date" id="form-tarikh" required class="w-full bg-emerald/5 border-b border-emerald/20 p-3 focus:outline-none focus:border-gold transition-colors">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] uppercase tracking-widest font-bold mb-2">Masa</label>
+                            <input type="time" id="form-masa" required class="w-full bg-emerald/5 border-b border-emerald/20 p-3 focus:outline-none focus:border-gold transition-colors">
+                        </div>
                     </div>
-                </div>
-                <h3 class="font-serif text-3xl mb-4 italic">Your ritual awaits.</h3>
-                <p class="text-olive/60 font-light mb-10 leading-relaxed">We have received your request. To confirm your slot immediately, please click below to send your details via WhatsApp.</p>
-                <a id="whatsappLink" href="#" target="_blank" class="inline-block bg-gold text-emerald px-10 py-4 text-xs tracking-widest uppercase font-bold transition-all">
-                    Confirm via WhatsApp
-                </a>
+
+                    <div id="confirm-msg" class="hidden py-4 text-center animate-pulse">
+                        <p class="font-serif italic text-gold text-lg">Ritual anda sedang menanti...</p>
+                    </div>
+
+                    <button type="submit" class="w-full bg-emerald text-cream py-5 text-sm font-bold uppercase tracking-[0.2em] hover:bg-gold hover:text-emerald transition-all shadow-lg mt-8">
+                        Kirim Tempahan via WhatsApp
+                    </button>
+                </form>
             </div>
         </div>
     </div>
 
     <script>
-        const modal = document.getElementById('bookingModal');
-        const modalContent = document.getElementById('modalContent');
-        const bookingForm = document.getElementById('bookingForm');
-        const successState = document.getElementById('successState');
-        const whatsappLink = document.getElementById('whatsappLink');
+        // Rose Petal Animation Logic
+        const petalContainer = document.getElementById('petal-container');
+        function createPetal() {
+            const petal = document.createElement('div');
+            const size = Math.random() * 15 + 10 + 'px';
+            petal.className = 'petal';
+            petal.style.width = size;
+            petal.style.height = size;
+            petal.style.left = Math.random() * 100 + 'vw';
+            petal.style.animationDuration = Math.random() * 3 + 4 + 's';
+            petal.style.opacity = Math.random() * 0.5 + 0.2;
+            petal.style.backgroundColor = ['#ffc0cb', '#ffb6c1', '#db7093'][Math.floor(Math.random() * 3)];
+            
+            petalContainer.appendChild(petal);
+            setTimeout(() => petal.remove(), 7000);
+        }
+        setInterval(createPetal, 400);
 
-        function toggleModal() {
-            if (modal.classList.contains('hidden')) {
-                modal.classList.remove('hidden');
-                setTimeout(() => {
-                    modalContent.classList.remove('translate-x-full');
-                }, 10);
-                document.body.style.overflow = 'hidden';
+        // Booking Drawer Logic
+        const drawer = document.getElementById('booking-drawer');
+        const content = document.getElementById('drawer-content');
+        
+        function toggleDrawer(ritual = '') {
+            if (drawer.classList.contains('hidden')) {
+                drawer.classList.remove('hidden');
+                if (ritual) document.getElementById('form-ritual').value = ritual;
+                setTimeout(() => content.classList.remove('translate-x-full'), 10);
             } else {
-                modalContent.classList.add('translate-x-full');
-                setTimeout(() => {
-                    modal.classList.add('hidden');
-                    resetForm();
-                }, 500);
-                document.body.style.overflow = 'auto';
+                content.classList.add('translate-x-full');
+                setTimeout(() => drawer.classList.add('hidden'), 500);
             }
         }
 
-        function openBooking(ritualName) {
-            document.getElementById('ritual').value = ritualName;
-            toggleModal();
-        }
-
-        function resetForm() {
-            bookingForm.classList.remove('hidden');
-            successState.classList.add('hidden');
-            bookingForm.reset();
-        }
-
-        bookingForm.addEventListener('submit', function(e) {
+        // WhatsApp Form Logic
+        document.getElementById('bookingForm').addEventListener('submit', function(e) {
             e.preventDefault();
+            const nama = document.getElementById('form-nama').value;
+            const tel = document.getElementById('form-tel').value;
+            const ritual = document.getElementById('form-ritual').value;
+            const tarikh = document.getElementById('form-tarikh').value;
+            const masa = document.getElementById('form-masa').value;
+            const confirmMsg = document.getElementById('confirm-msg');
+
+            confirmMsg.classList.remove('hidden');
+
+            const message = `Hi Serayna Spa, saya nak booking ritual:
+Nama: ${nama}
+Tel: ${tel}
+Rawatan: ${ritual}
+Tarikh: ${tarikh}
+Masa: ${masa}`;
+
+            const waLink = `https://wa.me/60112345678?text=${encodeURIComponent(message)}`;
             
-            const formData = {
-                name: document.getElementById('name').value,
-                phone: document.getElementById('phone').value,
-                ritual: document.getElementById('ritual').value,
-                date: document.getElementById('date').value,
-                time: document.getElementById('time').value
-            };
-
-            // WhatsApp Logic
-            const waNumber = "60123456789"; // Spa Phone Number
-            const text = `Hello Serayna Spa, I would like to book a ritual:%0A%0AName: ${formData.name}%0APhone: ${formData.phone}%0ARitual: ${formData.ritual}%0ADate: ${formData.date}%0APreferred Time: ${formData.time}`;
-            
-            whatsappLink.href = `https://wa.me/${waNumber}?text=${text}`;
-
-            // Visual State Change
-            bookingForm.classList.add('hidden');
-            successState.classList.remove('hidden');
-        });
-
-        // Close on Esc key
-        window.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') toggleModal();
+            setTimeout(() => {
+                window.open(waLink, '_blank');
+                toggleDrawer();
+                confirmMsg.classList.add('hidden');
+            }, 1500);
         });
     </script>
 </body>
